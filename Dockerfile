@@ -2,6 +2,10 @@ FROM openjdk:14.0.2-jdk-buster
 
 RUN apt update
 
+#Add private key
+ADD id_rsa /root/.ssh/id_rsa
+
+
 # Install maven 3.6.3
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && curl -fsSL -o /tmp/apache-maven.tar.gz https://apache.osuosl.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz \
