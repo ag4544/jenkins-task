@@ -4,6 +4,7 @@ pipeline {
     docker {
       image 'nexus.agwes.net:8443/buildcontainer'
       label 'jenkins-node'
+      args '-v /var/run/docker.sock:/var/run/docker.sock'
     }
 
   }
@@ -26,10 +27,9 @@ pipeline {
             }
         }
         stage ('pull docker image to webserver') {
-            agent {
-              label 'jenkins-node'
-            }
+
             steps {
+              sh 'ssh-keyscan -H 10.130.0.20 >> ~/.ssh/known_hosts'   
               sh '''ssh root@10.130.0.20 'docker login nexus.agwes.net:8443 -u admin -p HRtlop34' '''
               sh '''ssh root@10.130.0.20 'docker run nexus.agwes.net:8443/boxfuse-prod' '''
            }
