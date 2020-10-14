@@ -31,7 +31,7 @@ pipeline {
             steps {
               sh 'ssh-keyscan -H 10.130.0.20 >> ~/.ssh/known_hosts'   
               sh '''ssh root@10.130.0.20 'docker login nexus.agwes.net:8443 -u admin -p HRtlop34' '''
-              sh '''ssh root@10.130.0.20 'docker run nexus.agwes.net:8443/boxfuse-prod' '''
+              sh '''ssh root@10.130.0.20 'docker run -d -p 80:8080 nexus.agwes.net:8443/boxfuse-prod' '''
            }
     }
 }
