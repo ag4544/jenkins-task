@@ -21,7 +21,7 @@ pipeline {
         stage ('create docker image') {
             steps {
               sh 'cp -R target/hello-1.0.war docker/ROOT.war && cd docker/ && docker build --tag=boxfuse-prod .'
-              sh 'docker login nexus.agwes.net:8443 -u admin -p HRtlop34'
+              sh '''docker login nexus.agwes.net:8443 -u admin -p HRtlop34'''
               sh '''docker tag boxfuse-prod nexus.agwes.net:8443/boxfuse-prod && docker push nexus.agwes.net:8443/boxfuse-prod'''
             }
         }
